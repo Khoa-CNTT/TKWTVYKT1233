@@ -46,6 +46,8 @@ public class Client {
 
     @OneToMany(mappedBy = "client",cascade = CascadeType.REMOVE)
     private List<Doctor> doctors;
+    @OneToMany(mappedBy = "client",cascade = CascadeType.REMOVE)
+    private List<CustomerSupport> customerSupports;
 
 
     public Long getId() {

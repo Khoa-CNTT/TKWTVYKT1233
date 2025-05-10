@@ -3,6 +3,7 @@ package com.kltn.medicalwebsite.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -18,7 +19,7 @@ public class Appointment {
       private  String gender;
       private  String issueDescription;
       private  String status;
-      private LocalDate dateAppointment;
+      private LocalDateTime dateAppointment;
       private  String birthDate;
 
 
@@ -32,7 +33,7 @@ public class Appointment {
     public Appointment() {
     }
 
-    public Appointment(Long id, String fullName, String email, String phone, String address, String gender, String issueDescription, String status, String timeSlot, LocalDate dateAppointment, String birthDate, Doctor doctor, MedicalType medicalType, ConsultationSchedule consulationSchedule) {
+    public Appointment(Long id, String fullName, String email, String phone, String address, String gender, String issueDescription, String status, LocalDateTime dateAppointment, String birthDate, ConsultationSchedule consulationSchedule) {
         this.id = id;
         this.fullName = fullName;
         this.email = email;
@@ -123,11 +124,11 @@ public class Appointment {
         this.birthDate = birthDate;
     }
 
-    public LocalDate getDateAppointment() {
+    public LocalDateTime getDateAppointment() {
         return dateAppointment;
     }
 
-    public void setDateAppointment(LocalDate dateAppointment) {
+    public void setDateAppointment(LocalDateTime dateAppointment) {
         this.dateAppointment = dateAppointment;
     }
 

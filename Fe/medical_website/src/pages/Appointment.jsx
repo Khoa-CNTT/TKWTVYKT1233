@@ -1,16 +1,17 @@
 import React, { useState, useContext, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import { FiCalendar } from "react-icons/fi";
 import * as DoctorService from "../service/Doctor/DoctorApi";
-import NoDoctorFound from "../components/NoDoctorFound";
 import FeedbackList from "../components/FeedbackList";
 import RelatedDoctors from "../components/RelatedDoctors";
-import { time } from "framer-motion";
+import NoFoundData from "../components/NoFoundData";
+import { BiCalendarX } from "react-icons/bi";
 
 const Appointment = () => {
   const navigate = useNavigate();
   const { docId } = useParams();
+  const location = useLocation();
   const { currencySymbol } = useContext(AppContext);
   const daysOfWeek = [
     "CN",
@@ -47,11 +48,16 @@ const Appointment = () => {
     }
   }, [docSlots]);
 
+  // kiem tra query parameter showFeedBackForm
+  const query = new URLSearchParams(location.search);
+  const showFeedBackForm = query.get("showFeedBackForm") === "true";
+
   const findDoctorById = async (id) => {
     const result = await DoctorService.findDoctorById(id);
     setDoctor(result);
     setScheduleDoctors(result?.consultationSchedules);
   };
+
   const getAvailableSlots = (consultationSchedules) => {
     // Lọc các khung giờ chưa được đặt
     const availableSchedules = consultationSchedules.filter(
@@ -146,8 +152,8 @@ const Appointment = () => {
             />
           </div>
 
-          <div className="flex-1 border border-gray-400 rounded-lg p-6 py-4 bg-white mx-2 sm:mx-[-80px] sm:mt-0">
-            <p className="flex items-center gap-2 text-2xl font-medium text-gray-900 font-bold">
+          <div className="flex-1 border border-gray-400 rounded-lg p-6 py-4 bg-white mx-0 sm:mx-[-80px] sm:mt-0">
+            <p className="flex items-center gap-2 text-2xl text-gray-900 font-bold">
               {Doctor?.client?.fullName}
             </p>
             <div className="flex items-center gap-2 text-sm mt-1 text-gray-900">
@@ -170,7 +176,7 @@ const Appointment = () => {
           </div>
         </div>
 
-        <div className="sm:ml-75 sm:pl-4 font-medium text-gray-700">
+        <div className=" ml-10 sm:ml-85 font-medium text-gray-700">
           <div className="font-medium text-gray-700 flex gap-2 my-3">
             <FiCalendar className="text-2xl text-blue-900" />
             <p className="text-lg m-0">Lịch khám</p>
@@ -194,12 +200,13 @@ const Appointment = () => {
                 </div>
               ))
             ) : (
-              <div>
-                <div>
-                  <NoDoctorFound
-                    content={"Không có ngày làm việc  cho bác sĩ này "}
-                  />
-                </div>
+              <div className="col-span-full w-full flex justify-center">
+                <NoFoundData
+                  icon={BiCalendarX}
+                  iconColor="text-red-400" // Màu đỏ để thể hiện cảnh báo
+                  content="Bác sĩ không có lịch làm việc vào thời điểm này"
+                  size={72}
+                />
               </div>
             )}
           </div>
@@ -235,11 +242,11 @@ const Appointment = () => {
             Xác nhận lịch khám
           </button>
         </div>
-        <FeedbackList />
+        <FeedbackList showFeedBackForm={showFeedBackForm} docId={docId} />
 
-        {/* <div>
-            <RelatedDoctors />
-        </div> */}
+        <div>
+          <RelatedDoctors speciality={Doctor?.speciality?.id} docId={""} />
+        </div>
       </div>
     )
   );

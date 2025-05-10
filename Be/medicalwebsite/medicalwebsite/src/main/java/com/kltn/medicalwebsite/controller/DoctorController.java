@@ -6,9 +6,9 @@ import com.kltn.medicalwebsite.request.DoctorCreate;
 import com.kltn.medicalwebsite.request.DoctorRequest;
 import com.kltn.medicalwebsite.service.ConsultationScheduleService;
 import com.kltn.medicalwebsite.service.DoctorService;
-import jakarta.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

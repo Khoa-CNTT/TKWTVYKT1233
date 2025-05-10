@@ -1,6 +1,7 @@
 package com.kltn.medicalwebsite.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import org.springframework.boot.autoconfigure.web.WebProperties;
 
@@ -20,6 +21,7 @@ public class Review {
 
     @ManyToOne
     @JoinColumn(name = "id_doctor",referencedColumnName = "id")
+    @JsonBackReference
     private Doctor doctor;
 
     private  Integer rate;

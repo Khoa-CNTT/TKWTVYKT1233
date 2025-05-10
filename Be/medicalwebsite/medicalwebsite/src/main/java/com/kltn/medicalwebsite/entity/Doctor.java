@@ -36,6 +36,8 @@ public class Doctor {
     @OneToMany(mappedBy = "doctor",cascade = CascadeType.REMOVE)
     private  List<MedicalRecord> medicalRecords;
 
+
+    @JsonManagedReference
     @OneToMany(mappedBy = "doctor",cascade = CascadeType.REMOVE)
     private  List<Review> reviews;
 

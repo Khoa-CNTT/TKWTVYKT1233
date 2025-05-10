@@ -17,4 +17,5 @@ public interface SpecialityService {
 
     Speciality findSpecialityById(Long id);
 
+
 }

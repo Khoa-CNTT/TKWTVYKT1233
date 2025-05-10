@@ -18,6 +18,8 @@ public class appointmentCancellation {
 
     private  String message;
 
+    private  Double refund;
+
     private LocalDateTime createAt;
 
 
@@ -25,10 +27,11 @@ public class appointmentCancellation {
     public appointmentCancellation() {
     }
 
-    public appointmentCancellation(Long id, Payment payment, String message, LocalDateTime createAt) {
+    public appointmentCancellation(Long id, Payment payment, String message, Double refund, LocalDateTime createAt) {
         this.id = id;
         this.payment = payment;
         this.message = message;
+        this.refund = refund;
         this.createAt = createAt;
     }
 
@@ -62,5 +65,13 @@ public class appointmentCancellation {
 
     public void setCreateAt(LocalDateTime createAt) {
         this.createAt = createAt;
+    }
+
+    public Double getRefund() {
+        return refund;
+    }
+
+    public void setRefund(Double refund) {
+        this.refund = refund;
     }
 }

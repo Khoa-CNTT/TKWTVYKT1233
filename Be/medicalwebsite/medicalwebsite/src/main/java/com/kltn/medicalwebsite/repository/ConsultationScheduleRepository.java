@@ -14,4 +14,5 @@ public interface ConsultationScheduleRepository extends JpaRepository<Consultati
     void deleteByDoctorIdAndDateAppointmentBefore(Long doctorId, LocalDate date);
     boolean existsByDoctorIdAndDateAppointment(Long doctorId, LocalDate date);
     void deleteByDoctorId(Long idDoctor);
+    List<ConsultationSchedule> findByDoctorIdAndDateAppointmentBefore(Long doctorId,LocalDate today);
 }

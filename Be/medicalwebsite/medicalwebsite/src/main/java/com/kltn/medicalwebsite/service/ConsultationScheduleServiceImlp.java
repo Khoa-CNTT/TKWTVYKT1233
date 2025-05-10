@@ -3,18 +3,16 @@ package com.kltn.medicalwebsite.service;
 
 import com.kltn.medicalwebsite.entity.ConsultationSchedule;
 import com.kltn.medicalwebsite.entity.Doctor;
-import com.kltn.medicalwebsite.entity.MedicalType;
 import com.kltn.medicalwebsite.exception.DoctorException;
-import com.kltn.medicalwebsite.exception.MedicalTypeException;
 import com.kltn.medicalwebsite.repository.ConsultationScheduleRepository;
 import com.kltn.medicalwebsite.repository.DoctorRepository;
-import com.kltn.medicalwebsite.repository.MedicalTypeRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,7 +76,7 @@ public class ConsultationScheduleServiceImlp implements ConsultationScheduleServ
     }
     @Override
     @Transactional
-    @Scheduled(cron = "0 0 0 * * ?",zone = "Asia/Ho_Chi_Minh") // Chạy lúc 0:00 mỗi ngày
+    @Scheduled(cron = "0 0 0 * * ?", zone = "Asia/Ho_Chi_Minh")
     public void updateTimeSlotsForAllDoctors() {
         List<Doctor> doctors = doctorRepository.findAll();
         for (Doctor doctor : doctors) {

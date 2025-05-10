@@ -25,17 +25,27 @@ public class MedicalRecord {
     @Column(columnDefinition = "text")
     private  String prescription;
 
+    @Column(columnDefinition = "text")
+    private String note;
+
+    private  LocalDateTime birthDatePatient;
+
+    private  String gender;
+
     private LocalDateTime createdAt;
 
     public MedicalRecord() {
     }
 
-    public MedicalRecord(Long id, Client client, Doctor doctor, String diagnosis, String prescription, LocalDateTime createdAt) {
+    public MedicalRecord(Long id, Client client, Doctor doctor, String diagnosis, String prescription, String note, LocalDateTime birthDatePatient, String gender, LocalDateTime createdAt) {
         this.id = id;
         this.client = client;
         this.doctor = doctor;
         this.diagnosis = diagnosis;
         this.prescription = prescription;
+        this.note = note;
+        this.birthDatePatient = birthDatePatient;
+        this.gender = gender;
         this.createdAt = createdAt;
     }
 
@@ -85,5 +95,29 @@ public class MedicalRecord {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public LocalDateTime getBirthDatePatient() {
+        return birthDatePatient;
+    }
+
+    public void setBirthDatePatient(LocalDateTime birthDatePatient) {
+        this.birthDatePatient = birthDatePatient;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 }
